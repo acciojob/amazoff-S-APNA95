@@ -6,17 +6,20 @@ public class Order {
     private int deliveryTime;
 
     public Order(String id, String deliveryTime) {
-
+        this.id=id;
         // The deliveryTime has to converted from string to int and then stored in the attribute
         //deliveryTime  = HH*60 + MM
-        int hour = ((int) deliveryTime.charAt(0) * 10 + (int) deliveryTime.charAt(1)) * 60;
-        this.deliveryTime = hour + ((int)deliveryTime.charAt(3)*10 + (int)deliveryTime.charAt(4));
-
+        String[] timeArr=deliveryTime.split(":");
+        int hour=Integer.parseInt(timeArr[0]);
+        int min=Integer.parseInt(timeArr[1]);
+        this.deliveryTime=(hour*60)+min;
     }
 
     public String getId() {
         return id;
     }
 
-    public int getDeliveryTime() {return deliveryTime;}
+    public int getDeliveryTime() {
+        return deliveryTime;
+    }
 }
