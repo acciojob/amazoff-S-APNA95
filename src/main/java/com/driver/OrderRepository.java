@@ -33,8 +33,8 @@ public class OrderRepository {
         return deliveryPartner;
     }
     public Integer getOrderCountByPartnerId( String partnerId){
-        int numberOfOrders = partnerMap.get(partnerId).size();
-        return numberOfOrders;
+        int number = partnerMap.get(partnerId).size();
+        return number;
     }
     public List<String>  getOrdersByPartnerId(String partnerId){
         return partnerMap.get(partnerId);
@@ -45,7 +45,11 @@ public class OrderRepository {
     public Integer getCountOfUnassignedOrders(){
         Integer number = 0;
         Collection<List<String>> assignedOrders = partnerMap.values();
-        for(String orderId: orderMap.keySet())if(!assignedOrders.contains(orderId))number++;
+        for(String orderId: orderMap.keySet()){
+            if(!assignedOrders.contains(orderId)) {
+                number++;
+            }
+        }
         return number;
     }
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId){
@@ -80,7 +84,7 @@ public class OrderRepository {
 
     public void deleteOrderById(String orderId) {
         for(List<String> orders : new ArrayList<>(partnerMap.values())){
-            if(orders.contains(orderId)) orders.remove(orderId);
+            if(orders.contains(orderId))orders.remove(orderId);
         }
         orderMap.remove(orderId);
     }
